@@ -16,6 +16,13 @@
 		297497971F5F973000B92A59 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297497961F5F973000B92A59 /* UdacityClient.swift */; };
 		297497991F622CE200B92A59 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297497981F622CE200B92A59 /* GCDBlackBox.swift */; };
 		2974979B1F6239D000B92A59 /* uiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2974979A1F6239D000B92A59 /* uiHelper.swift */; };
+		2974979E1F64F54D00B92A59 /* studentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2974979D1F64F54D00B92A59 /* studentInfo.swift */; };
+		297497A01F64F64900B92A59 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2974979F1F64F64900B92A59 /* ParseClient.swift */; };
+		297497A21F64F8B500B92A59 /* studentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297497A11F64F8B500B92A59 /* studentDataSource.swift */; };
+		297497A61F650A3700B92A59 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297497A51F650A3700B92A59 /* MapVC.swift */; };
+		297497A81F68C8C200B92A59 /* AddAnnotationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297497A71F68C8C200B92A59 /* AddAnnotationVC.swift */; };
+		297962FA1F6B71E50049F59F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297962F91F6B71E50049F59F /* LocationManager.swift */; };
+		297962FC1F6B7FBB0049F59F /* AddStudentPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +37,13 @@
 		297497961F5F973000B92A59 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		297497981F622CE200B92A59 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		2974979A1F6239D000B92A59 /* uiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uiHelper.swift; sourceTree = "<group>"; };
+		2974979D1F64F54D00B92A59 /* studentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = studentInfo.swift; sourceTree = "<group>"; };
+		2974979F1F64F64900B92A59 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		297497A11F64F8B500B92A59 /* studentDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = studentDataSource.swift; sourceTree = "<group>"; };
+		297497A51F650A3700B92A59 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		297497A71F68C8C200B92A59 /* AddAnnotationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAnnotationVC.swift; sourceTree = "<group>"; };
+		297962F91F6B71E50049F59F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentPostVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +60,7 @@
 		297497751F5DE52600B92A59 = {
 			isa = PBXGroup;
 			children = (
+				297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */,
 				297497801F5DE52600B92A59 /* SwiftOnTheMap */,
 				2974977F1F5DE52600B92A59 /* Products */,
 			);
@@ -62,6 +77,8 @@
 		297497801F5DE52600B92A59 /* SwiftOnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				297962F91F6B71E50049F59F /* LocationManager.swift */,
+				2974979C1F64F52500B92A59 /* Model */,
 				297497951F5F96F000B92A59 /* Utilities */,
 				297497811F5DE52600B92A59 /* AppDelegate.swift */,
 				297497831F5DE52600B92A59 /* LoginVC.swift */,
@@ -70,6 +87,8 @@
 				2974978A1F5DE52600B92A59 /* LaunchScreen.storyboard */,
 				2974978D1F5DE52600B92A59 /* Info.plist */,
 				297497931F5DEAAC00B92A59 /* Constants.swift */,
+				297497A51F650A3700B92A59 /* MapVC.swift */,
+				297497A71F68C8C200B92A59 /* AddAnnotationVC.swift */,
 			);
 			path = SwiftOnTheMap;
 			sourceTree = "<group>";
@@ -80,8 +99,18 @@
 				297497961F5F973000B92A59 /* UdacityClient.swift */,
 				297497981F622CE200B92A59 /* GCDBlackBox.swift */,
 				2974979A1F6239D000B92A59 /* uiHelper.swift */,
+				2974979F1F64F64900B92A59 /* ParseClient.swift */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		2974979C1F64F52500B92A59 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2974979D1F64F54D00B92A59 /* studentInfo.swift */,
+				297497A11F64F8B500B92A59 /* studentDataSource.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,10 +188,17 @@
 			files = (
 				297497841F5DE52600B92A59 /* LoginVC.swift in Sources */,
 				297497821F5DE52600B92A59 /* AppDelegate.swift in Sources */,
+				297962FC1F6B7FBB0049F59F /* AddStudentPostVC.swift in Sources */,
+				2974979E1F64F54D00B92A59 /* studentInfo.swift in Sources */,
+				297497A81F68C8C200B92A59 /* AddAnnotationVC.swift in Sources */,
 				297497941F5DEAAC00B92A59 /* Constants.swift in Sources */,
 				297497971F5F973000B92A59 /* UdacityClient.swift in Sources */,
+				297497A61F650A3700B92A59 /* MapVC.swift in Sources */,
 				297497991F622CE200B92A59 /* GCDBlackBox.swift in Sources */,
+				297962FA1F6B71E50049F59F /* LocationManager.swift in Sources */,
+				297497A01F64F64900B92A59 /* ParseClient.swift in Sources */,
 				2974979B1F6239D000B92A59 /* uiHelper.swift in Sources */,
+				297497A21F64F8B500B92A59 /* studentDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +364,7 @@
 				297497921F5DE52600B92A59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

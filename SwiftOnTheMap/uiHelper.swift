@@ -26,4 +26,25 @@ class UIHelper {
                 }))
         
         }
+    
+    func DisplayErrorAlerts(msg: String, currentViewController: UIViewController?)
+    {
+    
+            //print(msg)
+            
+            let  alertController = UIAlertController()
+            alertController.title = "Not registered"
+            alertController.message = msg
+            
+            performUIUpdatesOnMain {
+                
+                currentViewController?.present(alertController, animated: true, completion: nil)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+                    alertController.dismiss(animated: true, completion: nil)
+                }))
+            }
+            
+    
+    
+    }
 }

@@ -19,6 +19,8 @@ class UdacityClient:NSObject{
     var userID : Int? = nil
     var logoutPressed: Bool = false
     
+    var uiHelp = UIHelper()
+    
     override init() {
         super.init()
     }
@@ -83,15 +85,14 @@ class UdacityClient:NSObject{
             let task = session.dataTask(with: request as URLRequest) { data, response, error in
                 jsonData = self.closures(data, response, error)
                 
+                //self.uiHelp.DisplayErrorAlerts(msg: "Password incorrect", currentViewController: presentVC)
+                
                 func displayError(string:String){
                     print(string)
-                    
-                     let  alertController = UIAlertController()
+                    let  alertController = UIAlertController()
                     alertController.title = "Not registered"
                     alertController.message = "Either the password or the username are wrong"
-                    
                     performUIUpdatesOnMain {
-                        
                         presentVC.present(alertController, animated:true,completion: nil)
                         
                         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
@@ -99,29 +100,29 @@ class UdacityClient:NSObject{
                         }))
                     }
                 }
- 
- 
+                
+                
                 guard let sessionDirctionary = jsonData?["session"] as? [String:AnyObject]else{
-                    displayError(string: "The session was not found")
+                    //displayError(string: "The session was not found")
                     return
                 }
-                
                 
                 self.sessionID = sessionDirctionary["id"]! as? String
                 
                 guard let accountDictionary = jsonData!["account"] as? [String: AnyObject]else{
-                    displayError(string: "account was not found")
+                    //displayError(string: "account was not found")
                     return
                 }
                 guard (accountDictionary["registered"]! as? Bool)  == true else{
-                    displayError(string:"not registered")
+                    //displayError(string:"not registered")
+                    
                     print(type(of: accountDictionary["registered"]!))
                     return
                 }
                 //for some unknown reason userID = accountDictionary["key"] as? Int fails that is why need the constant number
                 
                 guard let number = accountDictionary["key"] as? String else{
-                    displayError(string: "the user ID does not exist")
+                   // displayError(string: "the user ID does not exist")
                     //print(accountDictionary["key"])
                     //print(accountDictionary["key"] as? Int)
                     return
@@ -165,15 +166,15 @@ class UdacityClient:NSObject{
                 }
                 
                 
-            //   performUIUpdatesOnMain {
+              performUIUpdatesOnMain {
                    // print(logoutSessionID)
                     
-                   // let viewController = hostViewController.storyboard!.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                //let viewController = presentVC.storyboard!.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
                     
-                //    hostViewController.present(viewController, animated: true, completion: nil)
-                  //  hostViewController.dismiss(animated: true, completion: nil)
+                    //presentVC.present(viewController, animated: true, completion: nil)
+                    //presentVC.dismiss(animated: true, completion: nil)
                     
-               // }
+                }
             }
             task.resume()
         case "GET": //https://www.udacity.com/api/session/users/2412918542
