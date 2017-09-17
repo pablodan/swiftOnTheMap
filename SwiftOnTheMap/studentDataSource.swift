@@ -12,7 +12,7 @@ class StudentDS {
     
     var students = [Student]()
     var studentInfo: Student? = nil
-    var studentCollection = [String: AnyObject]()
+    var studentCollection = [Student]()
     
     static let sharedInstance = StudentDS()
     private init() {}

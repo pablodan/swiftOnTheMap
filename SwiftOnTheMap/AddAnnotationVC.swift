@@ -13,7 +13,10 @@ import MapKit
 class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var locationText: UITextField!
+    
+    @IBOutlet weak var UrlText: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var savePost: UIBarButtonItem!
 
     var currentLocation: String = ""
     var coreLocationManager = CLLocationManager()
@@ -25,23 +28,21 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        //hide save button
+        self.savePost.isEnabled = false
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+      
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    
+ 
     @IBAction func getLocation(_ sender: Any){
         
-        StudentDS.sharedInstance.studentCollection["mapString"] = locationText.text as AnyObject
-       
-        mapRequest.naturalLanguageQuery = locationText.text
-        mapRequest.region = mapView.region
-        let search = MKLocalSearch(request: mapRequest)
-        search.start { response, _ in
-            //function to display an error if the place is not found
+        
             func displayError(string:String){
                 print(string)
       
@@ -54,41 +55,15 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
                 }))
             }
             
-            guard let response = response else {
-                //self.activityIndicator.stopAnimating()
-                displayError(string:"There was no response")
-                return
-            }
-            
-            self.placeMark = response.mapItems[0].placemark
-            StudentDS.sharedInstance.studentCollection["latitude"] = self.placeMark!.coordinate.latitude as AnyObject
-            StudentDS.sharedInstance.studentCollection["longitude"] = self.placeMark!.coordinate.longitude as AnyObject
-            
-            
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = self.placeMark!.coordinate
-            annotation.title = self.placeMark?.name
-            if let city = self.placeMark?.locality,
-                let state = self.placeMark?.administrativeArea {
-                annotation.subtitle = "\(city) \(state)"
-            }
-            
-            performUIUpdatesOnMain {
-                self.mapView.addAnnotation(annotation)
-                let span = MKCoordinateSpanMake(0.05, 0.05)
-                let region = MKCoordinateRegionMake(self.placeMark!.coordinate, span)
-                
-                //self.activityIndicator.stopAnimating()
-                //self.activityIndicator.hidesWhenStopped = true
-                self.mapView.setRegion(region, animated: true)
-              }
-            }
     }
     
     @IBAction func closeView(_ sender: Any){
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func saveStudentLoction(_ sender: Any){
         
+   
     }
 
 }

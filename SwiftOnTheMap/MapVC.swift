@@ -13,43 +13,43 @@ import Foundation
 class MapVC: UIViewController, MKMapViewDelegate  {
 
     @IBOutlet weak var mapView: MKMapView!
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+    var annotations = [MKPointAnnotation]()
+    
+    override func viewDidLoad() {
+           self.doReload()
+    }
+    
+    func refreshMapView() {
+   
         
-        //reload mapview and display data
-        //mapView.removeAnnotation(mapView.annotations as! MKAnnotation)
-        
-        let parseParams = ["order":"-updatedAt" as AnyObject,"limit":100 as AnyObject]
-        
-        ParseCL.sharedInstance().parseGetMethod(ParseCL.sharedInstance().URLParseMethod(parseParams, nil)){ localStudentArray, error in
-            
-            //check if we have connectivity error
-            guard (error?.localizedDescription != "The Internet connection appears to be offline.")else{
-                // self.connectivityAlert(_title: "No internet Connection", "Can not load since there is no internet connectivity, please connect to the internet and try again")
-                return
-            }
-            // check if we have an error of other type
-            guard (error == nil) else{
-                // self.connectivityAlert(_title: "Error", "There was an error \(error?.localizedDescription)")
-                print("we do see this")
-                return
-            }
-            
-            self.closureToPopulateTheMap(localStudentArray)
-        }
-
     }
 
-    func closureToPopulateTheMap(_ dictionary:[[String:AnyObject]]){
-        StudentDS.sharedInstance.students = dictionary.map({Student($0)})
-        var annotations = [MKPointAnnotation]()
+    func addAnnotations(_ locations: [Student])  {
         
-        for students in StudentDS.sharedInstance.students{
-            annotations.append(students.annotation)
+        for location in locations {
+            
+            if let latitude = location.lat as! Double?, let longitude = location.long as! Double? {
+                
+                
+                let lat = CLLocationDegrees(latitude)
+                let long = CLLocationDegrees(longitude)
+                
+                // The lat and long are used to create a CLLocationCoordinates2D instance.
+                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                
+                if let first = location.firstName as? String, let last = location.lastName as? String, let mediaURL = location.mediaUrl as? String {
+                    // Here we create the annotation and set its coordiate, title, and subtitle properties
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = coordinate
+                    annotation.title = "\(first) \(last)"
+                    annotation.subtitle = mediaURL
+                    // Finally we place the annotation in an array of annotations.
+                    annotations.append(annotation)
+                } else {
+                    print("Error unwrapping values")
+                }
+            }
         }
-        
-        // When the array is complete, we add the annotations to the map.
         self.mapView.addAnnotations(annotations)
     }
 
@@ -93,4 +93,52 @@ class MapVC: UIViewController, MKMapViewDelegate  {
     }
     
 
+    @IBAction func reloadMapview(_ sender: Any) {
+        
+        refreshMapView()
+    }
+    
+    // reload pin data and mapview
+     func doReload() {
+        
+      
+        // display indictor
+        
+        //self.ai.show()
+        
+        //remove pins
+        self.mapView.removeAnnotations(self.annotations)
+        self.annotations.removeAll()
+        
+        // reset location data
+        StudentDS.sharedInstance.studentCollection.removeAll()
+        
+        networkClient.sharedInstance().getLocations(completed: { (downloadError) in
+            if downloadError != nil {
+               // self.doFailedAlert("Download Failed!", downloadError!)
+               // self.ai.hide()
+            } else {
+                // call main queue to update UI
+                DispatchQueue.main.async {
+                    self.reloadAnnotaions { (result, error) in
+                        if error != nil{
+                            print(error)
+                        }
+                        else {
+                            self.addAnnotations(result as! [Student])
+                        }
+                        // hide indicator
+                        //self.ai.hide()
+                    }
+                } // end async
+            } // end else
+        })// end get locations
+    }
+    
+    func reloadAnnotaions(_ completion: (_ result : AnyObject?,_ Error : NSError?) -> Void) {
+        // get locations and send back on completion
+        let locations = StudentDS.sharedInstance.studentCollection
+        completion(locations as AnyObject, nil)
+        
+    }
 }
