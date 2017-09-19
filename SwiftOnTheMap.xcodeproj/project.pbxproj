@@ -22,6 +22,7 @@
 		297962FA1F6B71E50049F59F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297962F91F6B71E50049F59F /* LocationManager.swift */; };
 		297962FC1F6B7FBB0049F59F /* AddStudentPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */; };
 		2979631C1F6DF4BE0049F59F /* networkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979631B1F6DF4BE0049F59F /* networkClient.swift */; };
+		2979631E1F717F700049F59F /* mapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979631D1F717F700049F59F /* mapAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		297962F91F6B71E50049F59F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentPostVC.swift; sourceTree = "<group>"; };
 		2979631B1F6DF4BE0049F59F /* networkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkClient.swift; sourceTree = "<group>"; };
+		2979631D1F717F700049F59F /* mapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		297497751F5DE52600B92A59 = {
 			isa = PBXGroup;
 			children = (
+				2979631D1F717F700049F59F /* mapAnnotation.swift */,
 				2979631B1F6DF4BE0049F59F /* networkClient.swift */,
 				297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */,
 				297497801F5DE52600B92A59 /* SwiftOnTheMap */,
@@ -187,6 +190,7 @@
 				297497821F5DE52600B92A59 /* AppDelegate.swift in Sources */,
 				297962FC1F6B7FBB0049F59F /* AddStudentPostVC.swift in Sources */,
 				2974979E1F64F54D00B92A59 /* studentInfo.swift in Sources */,
+				2979631E1F717F700049F59F /* mapAnnotation.swift in Sources */,
 				297497A81F68C8C200B92A59 /* AddAnnotationVC.swift in Sources */,
 				297497941F5DEAAC00B92A59 /* Constants.swift in Sources */,
 				297497A61F650A3700B92A59 /* MapVC.swift in Sources */,

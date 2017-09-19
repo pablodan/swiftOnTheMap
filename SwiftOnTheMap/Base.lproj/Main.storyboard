@@ -204,27 +204,23 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Ao-SZ-wgE">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Ao-SZ-wgE">
                                 <rect key="frame" x="44" y="102" width="287" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iUy-ee-mOF">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iUy-ee-mOF">
                                 <rect key="frame" x="44" y="140" width="287" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="i5C-8W-Jdg">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="i5C-8W-Jdg">
                                 <rect key="frame" x="0.0" y="223" width="375" height="444"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEy-0b-xOw">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEy-0b-xOw">
                                 <rect key="frame" x="44" y="178" width="287" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.011764705882352941" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="18"/>
                                 <state key="normal" title="Find Location">
@@ -240,14 +236,27 @@
                             <constraint firstAttribute="trailing" secondItem="GTN-we-IAM" secondAttribute="trailing" id="2KS-kc-RA7"/>
                             <constraint firstItem="GTN-we-IAM" firstAttribute="top" secondItem="0H1-lK-sBe" secondAttribute="top" constant="49" id="2bN-aS-wpK"/>
                             <constraint firstItem="GTN-we-IAM" firstAttribute="leading" secondItem="0H1-lK-sBe" secondAttribute="leading" id="2nn-LX-U1m"/>
+                            <constraint firstItem="i5C-8W-Jdg" firstAttribute="top" secondItem="bEy-0b-xOw" secondAttribute="bottom" constant="8" id="3JY-2d-h4X"/>
+                            <constraint firstItem="i5C-8W-Jdg" firstAttribute="leading" secondItem="0H1-lK-sBe" secondAttribute="leading" id="4xa-hi-Biq"/>
+                            <constraint firstItem="iUy-ee-mOF" firstAttribute="leading" secondItem="0H1-lK-sBe" secondAttribute="leading" constant="44" id="BOl-Tj-Lil"/>
+                            <constraint firstItem="iUy-ee-mOF" firstAttribute="top" secondItem="8Ao-SZ-wgE" secondAttribute="bottom" constant="8" id="CrO-zv-NV4"/>
+                            <constraint firstItem="8Ao-SZ-wgE" firstAttribute="top" secondItem="GTN-we-IAM" secondAttribute="bottom" constant="9" id="HYJ-xu-u0m"/>
+                            <constraint firstItem="bEy-0b-xOw" firstAttribute="leading" secondItem="0H1-lK-sBe" secondAttribute="leading" constant="44" id="Lsa-7T-bmm"/>
+                            <constraint firstAttribute="trailing" secondItem="8Ao-SZ-wgE" secondAttribute="trailing" constant="44" id="Pih-xM-bcR"/>
                             <constraint firstItem="GTN-we-IAM" firstAttribute="top" secondItem="0H1-lK-sBe" secondAttribute="topMargin" constant="-15" id="SlR-Cv-o68"/>
                             <constraint firstItem="GTN-we-IAM" firstAttribute="leading" secondItem="0H1-lK-sBe" secondAttribute="leading" id="UOn-3u-OiO"/>
+                            <constraint firstAttribute="trailing" secondItem="bEy-0b-xOw" secondAttribute="trailing" constant="44" id="Vap-Ec-Hkr"/>
                             <constraint firstItem="GTN-we-IAM" firstAttribute="leading" secondItem="0H1-lK-sBe" secondAttribute="leadingMargin" constant="-16" id="WJn-1J-Tmu"/>
+                            <constraint firstItem="VcQ-4G-z0b" firstAttribute="top" secondItem="i5C-8W-Jdg" secondAttribute="bottom" id="X9o-qF-si7"/>
+                            <constraint firstItem="bEy-0b-xOw" firstAttribute="top" secondItem="iUy-ee-mOF" secondAttribute="bottom" constant="8" id="a34-H7-dRc"/>
+                            <constraint firstAttribute="trailing" secondItem="i5C-8W-Jdg" secondAttribute="trailing" id="fSK-iP-QCs"/>
                             <constraint firstItem="GTN-we-IAM" firstAttribute="leading" secondItem="0H1-lK-sBe" secondAttribute="leading" id="hQi-23-IR2"/>
                             <constraint firstItem="GTN-we-IAM" firstAttribute="centerX" secondItem="0H1-lK-sBe" secondAttribute="centerX" id="krP-E0-v0j"/>
                             <constraint firstItem="GTN-we-IAM" firstAttribute="top" secondItem="0H1-lK-sBe" secondAttribute="top" constant="49" id="n43-Tv-BS6"/>
                             <constraint firstItem="GTN-we-IAM" firstAttribute="leading" secondItem="0H1-lK-sBe" secondAttribute="leading" id="nY1-Z6-5mZ"/>
                             <constraint firstItem="GTN-we-IAM" firstAttribute="top" secondItem="0H1-lK-sBe" secondAttribute="topMargin" constant="-15" id="p3t-0m-BLn"/>
+                            <constraint firstItem="8Ao-SZ-wgE" firstAttribute="leading" secondItem="0H1-lK-sBe" secondAttribute="leading" constant="44" id="pjI-x3-ySc"/>
+                            <constraint firstAttribute="trailing" secondItem="iUy-ee-mOF" secondAttribute="trailing" constant="44" id="rnb-oQ-htf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GTN-we-IAM" secondAttribute="trailing" constant="-16" id="t7c-tr-idL"/>
                         </constraints>
                     </view>
