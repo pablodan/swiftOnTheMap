@@ -23,6 +23,7 @@
 		297962FC1F6B7FBB0049F59F /* AddStudentPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */; };
 		2979631C1F6DF4BE0049F59F /* networkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979631B1F6DF4BE0049F59F /* networkClient.swift */; };
 		2979631E1F717F700049F59F /* mapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2979631D1F717F700049F59F /* mapAnnotation.swift */; };
+		297963221F7624F30049F59F /* StudentListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297963211F7624F30049F59F /* StudentListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentPostVC.swift; sourceTree = "<group>"; };
 		2979631B1F6DF4BE0049F59F /* networkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkClient.swift; sourceTree = "<group>"; };
 		2979631D1F717F700049F59F /* mapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapAnnotation.swift; sourceTree = "<group>"; };
+		297963211F7624F30049F59F /* StudentListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		297497751F5DE52600B92A59 = {
 			isa = PBXGroup;
 			children = (
+				297963211F7624F30049F59F /* StudentListVC.swift */,
 				2979631D1F717F700049F59F /* mapAnnotation.swift */,
 				2979631B1F6DF4BE0049F59F /* networkClient.swift */,
 				297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */,
@@ -196,6 +199,7 @@
 				297497A61F650A3700B92A59 /* MapVC.swift in Sources */,
 				297497991F622CE200B92A59 /* GCDBlackBox.swift in Sources */,
 				297962FA1F6B71E50049F59F /* LocationManager.swift in Sources */,
+				297963221F7624F30049F59F /* StudentListVC.swift in Sources */,
 				2979631C1F6DF4BE0049F59F /* networkClient.swift in Sources */,
 				2974979B1F6239D000B92A59 /* uiHelper.swift in Sources */,
 				297497A21F64F8B500B92A59 /* studentDataSource.swift in Sources */,

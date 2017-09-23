@@ -41,6 +41,7 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        findUserAnnotation()
         //hide save button
         self.savePost.isEnabled = false
     }
@@ -264,6 +265,7 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func getLocation(_ sender: Any){
         
+        removePins()
         
         localSearchRequest = MKLocalSearchRequest()
         localSearchRequest.naturalLanguageQuery = locationText.text
@@ -295,41 +297,7 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
             //enable save button
             self.savePost.isEnabled = true
             
-     /*
-        print("GET LOCATION")
-        if CLLocationManager.locationServicesEnabled() {
-            mapView.showsUserLocation = false
-            removePins()
-        }
-       */
      
-      // else{
-            
-           // self.locationManager.requestWhenInUseAuthorization()
-            
-            //if CLLocationManager.locationServicesEnabled() {
-               // self.locationManager.delegate = self
-               // self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-               // self.locationManager.startUpdatingLocation()
-               // print(self.locationManager.location.debugDescription)
-               // mapView.showsUserLocation = true
-  
-            //}
-    // }
-        
-            /*
-            func displayError(string:String){
-                print(string)
-      
-                let alertController = UIAlertController()
-                alertController.title = "Not found"
-                alertController.message = "We were not able to find the location, please try again"
-                self.present(alertController, animated:true,completion: nil)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
-                    alertController.dismiss(animated: true, completion: nil)
-                }))
-            }
-             */
             
         }
         
@@ -370,7 +338,9 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
     @IBAction func saveStudentLoction(_ sender: Any){
         
             self.locationManager.stopUpdatingLocation()
+    
         doSubmitLocation(userPinExists)
+        print(userPinExists)
 
     }
 
