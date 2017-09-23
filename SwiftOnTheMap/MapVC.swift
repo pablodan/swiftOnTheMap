@@ -16,13 +16,9 @@ class MapVC: UIViewController, MKMapViewDelegate  {
     var annotations = [MKPointAnnotation]()
     
     override func viewDidLoad() {
-           self.doReload()
+           self.refreshMapView()
     }
-    
-    func refreshMapView() {
-   
-        
-    }
+
 
     func addAnnotations(_ locations: [Student])  {
         
@@ -98,8 +94,21 @@ class MapVC: UIViewController, MKMapViewDelegate  {
         refreshMapView()
     }
     
+    @IBAction func Logout(_ sender: Any){
+    
+        networkClient.sharedInstance().logOut { (error) in
+            if error != nil {
+                //self.doFailedAlert("Logout Failed",error!)
+            } else {
+                DispatchQueue.main.async {
+                    //self.ai.hide()
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
     // reload pin data and mapview
-     func doReload() {
+     func refreshMapView() {
         
       
         // display indictor
@@ -115,7 +124,7 @@ class MapVC: UIViewController, MKMapViewDelegate  {
         
         networkClient.sharedInstance().getLocations(completed: { (downloadError) in
             if downloadError != nil {
-               // self.doFailedAlert("Download Failed!", downloadError!)
+                self.errorAlert("Their was a problem fetching Data", downloadError!)
                // self.ai.hide()
             } else {
                 // call main queue to update UI
@@ -127,8 +136,7 @@ class MapVC: UIViewController, MKMapViewDelegate  {
                         else {
                             self.addAnnotations(result as! [Student])
                         }
-                        // hide indicator
-                        //self.ai.hide()
+                   
                     }
                 } // end async
             } // end else
@@ -139,6 +147,17 @@ class MapVC: UIViewController, MKMapViewDelegate  {
         // get locations and send back on completion
         let locations = StudentDS.sharedInstance.studentCollection
         completion(locations as AnyObject, nil)
+        
+    }
+    
+    func errorAlert(_ msg: String, _ error: NSError){
+        performUIUpdatesOnMain {
+            let alert = UIAlertController(title: msg, message: "\(error.localizedDescription)", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Error!", style: .destructive, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true)
+            
+        }
         
     }
 }

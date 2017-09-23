@@ -98,6 +98,8 @@ class LoginVC: UIViewController {
                     //self.doSegue()
                     performUIUpdatesOnMain {
                         self.performSegue(withIdentifier: "loginNav", sender: self)
+                        self.passwordTxt.text = ""
+                        self.emailTxt.text = ""
                     }
                     
                 }
