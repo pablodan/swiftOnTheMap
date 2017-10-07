@@ -35,7 +35,7 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
     // bool for replace pin function
     var userPinExists = false
     
-    let urlParse = networkClient.URLFromParameters(networkClient.Constants.Parse.Scheme, networkClient.Constants.Parse.Host, networkClient.Constants.Parse.Path, withPathExtension: networkClient.Constants.Methods.StudentLocation)
+    let urlParse = networkClient.URLFromParameters(networkClient.Constants.ParseClient.ApiScheme, networkClient.Constants.ParseClient.ApiHost, networkClient.Constants.ParseClient.ApiPath, withPathExtension: networkClient.Constants.Methods.StudentLocation)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,9 +118,9 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
     func findUserAnnotation() {
         // method to locate any annotations by a given uniqueKey
         // creates array of user pins for replacement or deletion
-        let url = URL(string:"https://parse.udacity.com/parse/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(networkClient.Constants.UserSession.accountKey )%22%7D")
+        let url = URL(string:"https://parse.udacity.com/parse/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(networkClient.Constants.AuthParams.accountKey )%22%7D")
         
-        networkClient.sharedInstance().doAllTasks(url: url!, task:"GET", jsonBody: "", truncatePrefix: 0, completionHandlerForAllTasks:  { (result, error) in
+        networkClient.sharedInstance().processSession(url: url!, task:"GET", jsonBody: "", truncatePrefix: 0, completionHandlerForAllTasks:  { (result, error) in
             if error != nil {
                 print(error)
             }
@@ -147,7 +147,7 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
                 let url = URL(string:"https://parse.udacity.com/parse/classes/StudentLocation/\(string)")
                 print(url?.absoluteString)
                 
-                networkClient.sharedInstance().doAllTasks(url: url!, task: "DELETE", jsonBody: "", truncatePrefix: 0, completionHandlerForAllTasks: { (result, error) in
+                networkClient.sharedInstance().processSession(url: url!, task: "DELETE", jsonBody: "", truncatePrefix: 0, completionHandlerForAllTasks: { (result, error) in
                     if error != nil {
                         print(error?.localizedDescription)
                     }
@@ -163,9 +163,9 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
     func doReplacePin(_ jsonBody: String){
         // Call PUT HTTP to replace location object already in place
         
-        let url = networkClient.URLFromParameters(networkClient.Constants.Parse.Scheme, networkClient.Constants.Parse.Host, networkClient.Constants.Parse.Path, withPathExtension: networkClient.Constants.Methods.StudentLocation + "/" + StudentDS.sharedInstance.studentCollection[0].objectId! as! String, withQuery:  "")
+        let url = networkClient.URLFromParameters(networkClient.Constants.ParseClient.ApiScheme, networkClient.Constants.ParseClient.ApiHost, networkClient.Constants.ParseClient.ApiPath, withPathExtension: networkClient.Constants.Methods.StudentLocation + "/" + StudentDS.sharedInstance.studentCollection[0].objectId! as! String, withQuery:  "")
         
-        networkClient.sharedInstance().doAllTasks(url: url, task: "PUT", jsonBody: jsonBody, truncatePrefix: 0, completionHandlerForAllTasks:  { (result, error) in
+        networkClient.sharedInstance().processSession(url: url, task: "PUT", jsonBody: jsonBody, truncatePrefix: 0, completionHandlerForAllTasks:  { (result, error) in
             if error != nil {
                 //self.failedUpload(error!)
             } else {
@@ -197,7 +197,7 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
                 
                 // set json for request
                 
-                let jsonBody = networkClient.sharedInstance().makeJSON( [networkClient.Constants.Parse.UniqueKey : networkClient.Constants.UserSession.accountKey as AnyObject, networkClient.Constants.Parse.FirstName : StudentDS.sharedInstance.studentInfo?.firstName as AnyObject, networkClient.Constants.Parse.LastName : StudentDS.sharedInstance.studentInfo?.lastName as AnyObject, networkClient.Constants.Parse.MapString : StudentDS.sharedInstance.studentInfo?.mapString as AnyObject, networkClient.Constants.Parse.MediaURL : StudentDS.sharedInstance.studentInfo?.mediaUrl as AnyObject, networkClient.Constants.Parse.Latitude : StudentDS.sharedInstance.studentInfo?.lat as AnyObject, networkClient.Constants.Parse.Longitude : StudentDS.sharedInstance.studentInfo?.long] as [String: AnyObject])
+                let jsonBody = networkClient.sharedInstance().formatJson( [networkClient.Constants.ParseClient.UniqueKey : networkClient.Constants.AuthParams.accountKey as AnyObject, networkClient.Constants.ParseClient.FirstName : StudentDS.sharedInstance.studentInfo?.firstName as AnyObject, networkClient.Constants.ParseClient.LastName : StudentDS.sharedInstance.studentInfo?.lastName as AnyObject, networkClient.Constants.ParseClient.MapString : StudentDS.sharedInstance.studentInfo?.mapString as AnyObject, networkClient.Constants.ParseClient.MediaUrl : StudentDS.sharedInstance.studentInfo?.mediaUrl as AnyObject, networkClient.Constants.ParseClient.Latitude : StudentDS.sharedInstance.studentInfo?.lat as AnyObject, networkClient.Constants.ParseClient.Longitude : StudentDS.sharedInstance.studentInfo?.long] as [String: AnyObject])
  
                 
                 if replacePin {
@@ -209,7 +209,7 @@ class AddAnnotationVC: UIViewController, CLLocationManagerDelegate {
                     
                     // otherwise create users first pin
                     let url = self.urlParse
-                    networkClient.sharedInstance().doAllTasks(url: url, task: "POST", jsonBody: jsonBody, truncatePrefix: 0, completionHandlerForAllTasks:{ (results, error) in
+                    networkClient.sharedInstance().processSession(url: url, task: "POST", jsonBody: jsonBody, truncatePrefix: 0, completionHandlerForAllTasks:{ (results, error) in
                         
                         // Send values to completion handler
                         if let error = error {

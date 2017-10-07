@@ -12,90 +12,107 @@ extension networkClient {
 
     struct Constants {
         
-        //MARK: UDACITY
-        struct Udacity {
-            static let Scheme = "https"
-            static let Host = "www.udacity.com"
-            static let Path = "/api"
+        //MARK: UdacityClient
+        struct UdacityClient {
+            static let ApiScheme = "https"
+            static let ApiPath = "/api"
             static let UserPath = "/users/"
+            static let ApiHost = "www.udacity.com"
         }
         
-        //MARK: PARSE
-        
-        struct Parse {
-            static let Scheme = "https"
-            static let Host = "parse.udacity.com"
-            static let Path = "/parse/classes"
-            static let UsersPath = "/parse/users/"
+        //MARK: ParseClient
+        struct ParseClient {
+            static let ApiScheme = "https"
+            static let ApiHost = "parse.udacity.com"
+            static let ApiPath = "/parse/classes"
+            static let UserPath = "/parse/users/"
             static let UniqueKey = "uniqueKey"
-            static let FirstName = "firstName"
-            static let LastName = "lastName"
+            static let MediaUrl = "mediaURL"
             static let MapString = "mapString"
-            static let MediaURL = "mediaURL"
             static let Latitude = "latitude"
             static let Longitude = "longitude"
+            static let FirstName = "firstName"
+            static let LastName = "lastName"
+            static let ParseHttpHeaderId = "X-Parse-Application-Id"
+            static let ParseHttpHeaderKey = "X-Parse-REST-API-Key"
+            
+            
         }
         
-        //MARK: PARAMETER KEYS
-        struct ParameterKeys {
-            static let Method = "method"
-            static let APIKey = "api_key"
+        // MARK: Parameter Keys
+        struct ParseParams {  //was ParameterKeys
+            //static let Method = "method"
+            //static let ApiKey = "api_key"
+            static let ApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+            static let ParseID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         }
         
-        // MARK: VALUES
+        // MARK: Parameter Values
         
-        struct ParameterValues {
-            static let SearchMethod = "search"
-            static let APIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
-            static let ParseAppID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
+        struct ParseParamValues {  //was ParameterValues
+            //static let SearchMethod = "search"
+            static let ApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+            static let ParseID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         }
         
+         // MARK: Methods
         struct Methods {
             static let Session = "/session"
             static let StudentLocation = "/StudentLocation"
             static let StudentInfo = "/users/"
+            static let Get = "GET"
+            static let Post = "POST"
+            static let Put = "PUT"
+            static let Delete = "DELETE"
         }
         
-        struct LoginKeys {
+        //MARK: Bearer
+        
+        struct Bearer {
+            static let Bearer = "application/json"
+            
+            
+        }
+         // MARK: Authorization
+        struct AuthParams {  //wsa LoginKeys
             static let Udacity = "udacity"
             static let Username = "username"
             static let Password = "password"
+            
+            /*****************************/
+            static let AccountID = "account"
+            static let Registered = "registered"
+            static let Key = "key"
+            static let SessionID = "session"
+            static let ID = "id"
+            static let Expiration = "expiration"
+            /************************************/
+            static var accountKey = ""
+            static var sessionID = ""
+            static var sessionExpires = ""
+            
         }
         
-        struct LoginResponseKeys {
+        
+        /*struct LoginResponseKeys {  //now in AuthParams
             
             // MARK: Account
             static let AccountID = "account"
             static let Registered = "registered"
             static let Key = "key"
-            
-            // MARK: Facebook
-            
-            static let FBUserId = "userId"
-            static let FBAuthToken = "access_token"
-            static let FBMobile = "facebook_mobile"
-            
-            
-            // MARK: Session
             static let SessionID = "session"
             static let ID = "id"
             static let Expiration = "expiration"
-            
-        }
+ 
+        }*/
         
-        //MARK: USER SESSION
-        
-        struct UserSession {
+       /*
+        struct UserSession { //now in AuthParams
             static var accountKey = ""
             static var sessionID = ""
             static var sessionExpires = ""
-            
-            // fb
-            
-            static var userId = ""
-            static var fbAuthToken = ""
-            
-        }
+  
+        }*/
         
         
     }

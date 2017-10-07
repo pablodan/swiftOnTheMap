@@ -43,7 +43,7 @@
 		297497A71F68C8C200B92A59 /* AddAnnotationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAnnotationVC.swift; sourceTree = "<group>"; };
 		297962F91F6B71E50049F59F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentPostVC.swift; sourceTree = "<group>"; };
-		2979631B1F6DF4BE0049F59F /* networkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkClient.swift; sourceTree = "<group>"; };
+		2979631B1F6DF4BE0049F59F /* networkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = networkClient.swift; path = ../networkClient.swift; sourceTree = "<group>"; };
 		2979631D1F717F700049F59F /* mapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapAnnotation.swift; sourceTree = "<group>"; };
 		297963211F7624F30049F59F /* StudentListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,13 +59,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		294697651F80AE6500D61F79 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */,
+				297963211F7624F30049F59F /* StudentListVC.swift */,
+				297497831F5DE52600B92A59 /* LoginVC.swift */,
+				297497A51F650A3700B92A59 /* MapVC.swift */,
+				297497A71F68C8C200B92A59 /* AddAnnotationVC.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		297497751F5DE52600B92A59 = {
 			isa = PBXGroup;
 			children = (
-				297963211F7624F30049F59F /* StudentListVC.swift */,
+				294697651F80AE6500D61F79 /* Views */,
 				2979631D1F717F700049F59F /* mapAnnotation.swift */,
-				2979631B1F6DF4BE0049F59F /* networkClient.swift */,
-				297962FB1F6B7FBB0049F59F /* AddStudentPostVC.swift */,
 				297497801F5DE52600B92A59 /* SwiftOnTheMap */,
 				2974977F1F5DE52600B92A59 /* Products */,
 			);
@@ -86,14 +96,11 @@
 				2974979C1F64F52500B92A59 /* Model */,
 				297497951F5F96F000B92A59 /* Utilities */,
 				297497811F5DE52600B92A59 /* AppDelegate.swift */,
-				297497831F5DE52600B92A59 /* LoginVC.swift */,
 				297497851F5DE52600B92A59 /* Main.storyboard */,
 				297497881F5DE52600B92A59 /* Assets.xcassets */,
 				2974978A1F5DE52600B92A59 /* LaunchScreen.storyboard */,
 				2974978D1F5DE52600B92A59 /* Info.plist */,
 				297497931F5DEAAC00B92A59 /* Constants.swift */,
-				297497A51F650A3700B92A59 /* MapVC.swift */,
-				297497A71F68C8C200B92A59 /* AddAnnotationVC.swift */,
 			);
 			path = SwiftOnTheMap;
 			sourceTree = "<group>";
@@ -101,6 +108,7 @@
 		297497951F5F96F000B92A59 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2979631B1F6DF4BE0049F59F /* networkClient.swift */,
 				297497981F622CE200B92A59 /* GCDBlackBox.swift */,
 				2974979A1F6239D000B92A59 /* uiHelper.swift */,
 			);

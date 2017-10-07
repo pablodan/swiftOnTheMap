@@ -12,32 +12,32 @@ class networkClient: NSObject {
     // MARK: Properties
     
     // shared session
-    var session = URLSession.shared
+    //var session = URLSession.shared
+    //var requestToken: String? = nil
+    //var sessionID : String? = nil
+   // var userID : Int? = nil
 
-    // authentication state
-    var requestToken: String? = nil
-    var sessionID : String? = nil
-    var userID : Int? = nil
-    
-    
     // MARK: Initializers
+    
+    //MARK: SHARED INSTANCE
+    class func sharedInstance() -> networkClient {
+        struct Singleton {
+            static var sharedInstance = networkClient()
+        }
+        return Singleton.sharedInstance
+    }
     
     override init() {
         super.init()
     }
-    
-    
+
     // MARK: log out
-    
-    func logOut(completed: @escaping (_ error: NSError?) -> ())  {
-        // check for log in type
-        // if FB call the loginManager to do a log off
-        // else build URL DELETE request
-        
+    func logOut(completed: @escaping (_ error: NSError?) -> ())  {        
             // do udacity log out
-          let url = networkClient.URLFromParameters(Constants.Udacity.Scheme, Constants.Udacity.Host, Constants.Udacity.Path, withPathExtension: Constants.Methods.Session, withQuery: "")
+          let url = networkClient.URLFromParameters(Constants.UdacityClient.ApiScheme, Constants.UdacityClient.ApiHost, Constants.UdacityClient.ApiPath, withPathExtension: Constants.Methods.Session, withQuery: "")
        
-            doAllTasks(url: url, task: "DELETE", jsonBody: "", truncatePrefix: 5, completionHandlerForAllTasks: { (result, error) in
+        //was processSession
+            processSession(url: url, task: "DELETE", jsonBody: "", truncatePrefix: 5, completionHandlerForAllTasks: { (result, error) in
                 if error != nil {
                     print(error)
                     completed(error)
@@ -46,17 +46,15 @@ class networkClient: NSObject {
                     completed(nil)
                 }
             })// end allTasks
-    
-        
     }
 
     // MARK: MAKE JSON
     
-    func makeJSON(_ jsonBody: [String:AnyObject]) -> String {
+    func formatJson(_ json: [String:AnyObject]) -> String {
         
-        let json = try? JSONSerialization.data(withJSONObject: jsonBody, options: .prettyPrinted)
-        let dataString = NSString(data: json!, encoding: String.Encoding.utf8.rawValue)
-        return dataString as! String
+        let newJson = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+        let body = NSString(data: newJson!, encoding: String.Encoding.utf8.rawValue)
+        return body as! String
     }
     
     
@@ -69,15 +67,17 @@ class networkClient: NSObject {
     //  -> truncatePrefix used for the Udacity Log in with a value of 5 to pass their security technique
     // completion handler to handle the result or error via passthroughs.
     
-    func doAllTasks(url: URL, task: String, jsonBody: String, truncatePrefix: Int, completionHandlerForAllTasks: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    
+    //was processSession
+    func processSession(url: URL, task: String, jsonBody: String, truncatePrefix: Int, completionHandlerForAllTasks: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         //build requeset based on HTTP method
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = task
         let urlstring = url.absoluteString
         
         if task == "PUT" {
-            request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-            request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+            request.addValue(Constants.ParseParamValues.ParseID, forHTTPHeaderField: Constants.ParseClient.ParseHttpHeaderId)
+            request.addValue(Constants.ParseParamValues.ApiKey, forHTTPHeaderField: Constants.ParseClient.ParseHttpHeaderKey)
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         } else {
@@ -100,27 +100,23 @@ class networkClient: NSObject {
             } else {
                 
                 //Parse requests
-                request.addValue(networkClient.Constants.ParameterValues.ParseAppID, forHTTPHeaderField: "X-Parse-Application-Id")
-                request.addValue(networkClient.Constants.ParameterValues.ParseAppID, forHTTPHeaderField: "X-Parse-REST-API-Key")
+                request.addValue(networkClient.Constants.ParseParams.ParseID, forHTTPHeaderField: "X-Parse-Application-Id")
+                request.addValue(networkClient.Constants.ParseParams.ParseID, forHTTPHeaderField: "X-Parse-REST-API-Key")
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                
             }
-        } // end PUT {} Else {}
-        // encode request
+        }
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
         return doRequestWithCompletion(request, truncatePrefix: truncatePrefix, completion: completionHandlerForAllTasks)
     }
 
     // GET LOCATIONS
-    
-    
     // helper for get locations data
     func downloadJSON(_ completion:  @escaping (_ result: AnyObject?, _ error: NSError?) -> Void ) -> URLSessionDataTask {
         // build url and submit for data in order
         
-        let url = networkClient.URLFromParameters(networkClient.Constants.Parse.Scheme, networkClient.Constants.Parse.Host, networkClient.Constants.Parse.Path, withPathExtension: networkClient.Constants.Methods.StudentLocation , withQuery:  "?order=updatedAt")
+        let url = networkClient.URLFromParameters(networkClient.Constants.ParseClient.ApiScheme, networkClient.Constants.ParseClient.ApiHost, networkClient.Constants.ParseClient.ApiPath, withPathExtension: networkClient.Constants.Methods.StudentLocation , withQuery:  "?order=updatedAt")
         
-        return networkClient.sharedInstance().doAllTasks(url: url, task: "GET", jsonBody: "", truncatePrefix: 0, completionHandlerForAllTasks:  completion)
+        return networkClient.sharedInstance().processSession(url: url, task: "GET", jsonBody: "", truncatePrefix: 0, completionHandlerForAllTasks:  completion)
         
     }
     
@@ -135,14 +131,11 @@ class networkClient: NSObject {
             } else {
                 let locationsDict = result?["results"] as! [[String : Any]]
                 for item in locationsDict {
-                    
-                    // MARK: REVISIT
                     var newLocation = Student(studentData: item)
                     if let dstring = item["updatedAt"] as? String {
                         newLocation.updatedAt = self.getDate(date: dstring)
                         //self.locations.append(newLocation)
                         StudentDS.sharedInstance.studentCollection.append(newLocation)
-                        
                     }
                 }
             }
@@ -155,12 +148,7 @@ class networkClient: NSObject {
         })
         
     }
-    
-    
-    // modified from
-    // https://stackoverflow.com/questions/41628425/how-to-convert-2017-01-09t110000-000z-into-date-in-swift-3
-    // vvvvv
-    
+
     func getDate(date: String) -> NSDate {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -168,10 +156,7 @@ class networkClient: NSObject {
         let dateResult = dateFormatter.date(from: date)
         return dateResult as! NSDate
     }
-    
-    
     // MARK: SORT
-    
     func sortLocations(completed: @escaping () -> ()) {
         // sort by updated by date
         for location in StudentDS.sharedInstance.studentCollection {
@@ -180,15 +165,13 @@ class networkClient: NSObject {
         StudentDS.sharedInstance.studentCollection.sort(by: { ($0.updatedAt as? NSDate)?.compare(($1.updatedAt as? NSDate)! as Date) == .orderedDescending})
         completed()
     }
-    
-    
-    
+
     // MARK: GET MY USER INFO
     func getMyUser() {
         // request info based on account key
         // on success set struct to contain name and key
-        let url = networkClient.URLFromParameters(Constants.Udacity.Scheme, Constants.Udacity.Host, Constants.Udacity.Path, withPathExtension: Constants.Udacity.UserPath as! String + Constants.UserSession.accountKey as! String  , withQuery: nil)
-        networkClient.sharedInstance().doAllTasks(url: url, task: "GET", jsonBody: "", truncatePrefix: 5, completionHandlerForAllTasks:  {(results, error) in
+        let url = networkClient.URLFromParameters(Constants.UdacityClient.ApiScheme, Constants.UdacityClient.ApiHost, Constants.UdacityClient.ApiPath, withPathExtension: Constants.UdacityClient.UserPath as! String + Constants.AuthParams.accountKey as! String  , withQuery: nil)
+        networkClient.sharedInstance().processSession(url: url, task: "GET", jsonBody: "", truncatePrefix: 5, completionHandlerForAllTasks:  {(results, error) in
             if let error = error {
                 print(error)
             } else {
@@ -198,18 +181,15 @@ class networkClient: NSObject {
             print(StudentDS.sharedInstance.studentInfo?.firstName, StudentDS.sharedInstance.studentInfo?.lastName, StudentDS.sharedInstance.studentInfo?.uniqueKey)
             
         })
-        
     }
-    
-    
-    
-    
+
     // request - prebuilt when passed in,
     // truncate prefix - remove x from the front of the data before parsing it.
     // completion handler to process result or error via passthroughs
     func doRequestWithCompletion(_ request: NSMutableURLRequest, truncatePrefix: Int, completion: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         /* 4. Make the request */
-        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+        var currentSession = URLSession.shared
+        let task = currentSession.dataTask(with: request as URLRequest) { (data, response, error) in
             print(request)
             func sendError(_ error: String) {
                 print(error)
@@ -282,10 +262,6 @@ class networkClient: NSObject {
         return task
         
     }
-    
-    
-    
-    
     // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
@@ -298,10 +274,6 @@ class networkClient: NSObject {
         }
         completionHandlerForConvertData(parsedResult, nil)
     }
-    
-    
-    
-    
     // create a URL from parameters
     
     class func URLFromParameters(_ scheme: String, _ host: String, _ path: String, withPathExtension: String? = nil, withQuery: String? = nil) -> URL{
@@ -321,18 +293,7 @@ class networkClient: NSObject {
         
         return components.url!
     }
-    
-    
-    
-    
-    //MARK: SHARED INSTANCE
-    
-    
-    class func sharedInstance() -> networkClient {
-        struct Singleton {
-            static var sharedInstance = networkClient()
-        }
-        return Singleton.sharedInstance
-    }
+
+
     
 }
